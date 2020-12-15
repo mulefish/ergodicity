@@ -9,4 +9,4 @@ https://www.nature.com/articles/s41567-019-0732-0 ) which intrigued me. This wil
 ergodicity
 
 # image
-![Alt text](run_of_10.png?raw=true "Run of ten")
+![Alt text](run_of_15.png?raw=true "Run of ten")
