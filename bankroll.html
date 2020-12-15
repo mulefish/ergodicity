@@ -73,7 +73,7 @@
                            <option>50</option>
                         </select>
                      </td>
-                  </tr>
+			</tr> 
                   <tr>
                      <td>
                      </td>
@@ -92,6 +92,19 @@
             </td>
          </tr>
       </table>
+	<table border='1'> 
+		<tr>
+			<th>run</th>
+			<th>total</th>
+			<th>average</th>
+		</tr> 	
+		<tr>
+			<td><div class='r' id='run'></div></td>
+			<td><div class='r' id='total'></div></td>
+			<td><div class='r' id='average'></div></td>
+		</tr>
+	</table> 
+	
       <hr/>
       <div id='content'></div>
       <script>
@@ -119,6 +132,8 @@
          }
          const UP = 'up';
          const DOWN = 'down'; 
+	 let runCount = 0; 
+	let runningTotal = 0 ; 
          const doit = (up, down, iterations) => {
              let bankroll = 100;
              let most = 0 ;
@@ -153,6 +168,14 @@
          
          
              }
+runCount++; 		
+runningTotal += results[results.length - 1].bankroll; 
+ave = runningTotal / runCount; 
+	
+		document.getElementById("run").innerHTML = runCount; 
+		document.getElementById("total").innerHTML = runningTotal.toFixed(0) ; 
+		document.getElementById("average").innerHTML = ave.toFixed(0) ; 
+
          	makeGUI(results, most ) ; 
          }
          
