@@ -1,0 +1,186 @@
+<html>
+   <head>
+      <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+      <meta content="utf-8" http-equiv="encoding">
+      <link rel="icon" href="data:,">
+      <style>
+         select { width:200px; text-align:right;  } 
+         #nudge { text-align:right; 
+         padding-right:20px;
+         } 
+         .r {
+         text-align:right;
+         } 
+         .paleGreen {
+         border: 1px solid #00ff00;  
+         background-color:#98fb98; 
+         } 
+         .lightOrange { 
+         background-color:#fed8b1; 
+         border: 1px solid #ff6633;
+         } 
+      </style>
+   </head>
+   <body>
+      <table>
+         <tr>
+            <td valign='top'>
+               <table border='1'>
+                  <tr>
+                     <td>bankroll start</td>
+                     <td id='nudge'>100</td>
+                  </tr>
+                  <tr>
+                     <td> upside percent </td>
+                     <td>
+                        <select id='upside'>
+                           <option>.1</option>
+                           <option>.2</option>
+                           <option>.3</option>
+                           <option>.4</option>
+                           <option selected='true'>.5</option>
+                           <option>.6</option>
+                           <option>.7</option>
+                           <option>.8</option>
+                           <option>.9</option>
+                        </select>
+                     <td>
+                  </tr>
+                  <tr>
+                     <td> downside percent </td>
+                     <td>
+                        <select id='downside'>
+                           <option >.1</option>
+                           <option >.2</option>
+                           <option >.3</option>
+                           <option selected='true'>.4</option>
+                           <option >.5</option>
+                           <option>.6</option>
+                           <option>.7</option>
+                           <option>.8</option>
+                           <option>.9</option>
+                        </select>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>iteration count</td>
+                     <td>
+                        <select id='iterations'>
+                           <option selected='true'>10</option>
+                           <option >20</option>
+                           <option>30</option>
+                           <option>40</option>
+                           <option>50</option>
+                        </select>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>
+                     </td>
+                     <td>
+                        <button onclick='run()' style='width:100%; background-color:#98FB98;'>click to run</button>
+                     </td>
+                  </tr>
+               </table>
+            </td>
+            <td valign='top'>
+               <div style='padding-left:20px;'> 
+                  ergodicity<br/>
+                  <a href='https://www.bloomberg.com/news/articles/2020-12-11/everything-we-ve-learned-about-modern-economic-theory-is-wrong'>https://www.bloomberg.com/news/articles/2020-12-11/everything-we-ve-learned-about-modern-economic-theory-is-wrong</a><br/>
+                  <a href='https://www.nature.com/articles/s41567-019-0732-0'>https://www.nature.com/articles/s41567-019-0732-0</a>
+               </div>
+            </td>
+         </tr>
+      </table>
+      <hr/>
+      <div id='content'></div>
+      <script>
+         const getFloatValue = id => {
+             const widget = document.getElementById(id);
+             const v = parseFloat(widget.options[widget.selectedIndex].text);
+             return v;
+         }
+         const getIntValue = id => {
+             const widget = document.getElementById(id);
+             const v = parseInt(widget.options[widget.selectedIndex].text);
+             return v;
+         }
+         
+         function run() {
+             const upPercentage = getFloatValue('upside');
+             const downPercentage = getFloatValue('downside');
+             const iterations = getIntValue('iterations');
+         
+             doit(upPercentage, downPercentage, iterations);
+         
+         
+         
+         
+         }
+         const UP = 'up';
+         const DOWN = 'down'; 
+         const doit = (up, down, iterations) => {
+             let bankroll = 100;
+             let most = 0 ;
+             let results = [{
+                 bankroll,
+                 result: 'start'
+             }];
+             for (let i = 0; i < iterations; i++) {
+         
+         
+                 const r = Math.random();
+                 let result = UP;
+                 if (r > 0.5) {
+                     const more = bankroll * up;
+                     bankroll += more;
+                     result = UP;   
+                 } else {
+                     const less = bankroll * down;
+                     bankroll -= less;
+                     result = DOWN;  
+         
+                 }
+                 results.push({
+                     bankroll,
+                     result
+                 });
+         
+         	// needed for gui 
+         	if ( most <  bankroll ) { 
+         		most = bankroll; 
+         	} 
+         
+         
+             }
+         	makeGUI(results, most ) ; 
+         }
+         
+         const makeGUI = ( results, most )  => { 
+         	const maxPixles = 500; 
+         	results.forEach((result) =>{ 
+         		result.pixels = maxPixles * result.bankroll / most; 
+         	}); 
+         
+         
+         	let html = `<table border='1'>
+			<tr><td colspan='2'>Numbers will never actually reach 0 but to the right of the decimal is not being shown. </td></tr>
+         		<tr>
+         			<th>i</th>
+         			<th>Bankroll</th>
+         		</tr>`
+         	
+         	results.forEach(( item, i)=>  { 
+         		const dollar = "&nbsp;&nbsp;$" + item.bankroll.toFixed(0); 
+         		const cssClass = item.result == UP ? 'paleGreen' : 'lightOrange'; 
+         		html += `<tr>
+         			<td class='r'>${i}</td>
+         			<td> <div class='${cssClass}' style='width:${item.pixels}'; >${dollar}</div> </td>
+         			</tr>`
+         
+         	} ) ; 
+         	document.getElementById("content").innerHTML = html ; 
+         } 
+      </script> 
+   </body>
+</html>
