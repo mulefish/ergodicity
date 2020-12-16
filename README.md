@@ -9,4 +9,7 @@ https://www.nature.com/articles/s41567-019-0732-0 ) which intrigued me. This wil
 ergodicity
 
 # image
+
+15 generations, each running 50 iterations. 2 generations made more than their starting position ( $100 ). 
+
 ![Alt text](run_over_runs.png?raw=true "Run of ten")
