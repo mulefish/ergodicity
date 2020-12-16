@@ -1,0 +1,165 @@
+<html>
+   <head>
+	<script type="text/javascript" src="logic.js" ></script>
+	<script type="text/javascript" src="standard_deviation.js" ></script>
+      <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+      <meta content="utf-8" http-equiv="encoding">
+      <link rel="icon" href="data:,">
+      <style>
+         select { width:200px; text-align:right;  } 
+         #nudge { 
+            text-align:right; 
+            padding-right:20px;
+         } 
+         .r {
+         text-align:right;
+         } 
+         .paleGreen {
+         border: 1px solid #00ff00;  
+         background-color:#00ff00; 
+         } 
+         .lightOrange { 
+         background-color:#ff6633; 
+         border: 1px solid #ff6633;
+         }
+         .made_money {
+            text-align:right;
+            border: 1px solid #00ff00;  
+            background-color:#00ff00; 
+         } 
+         .lost_money {
+            text-align:right;
+            border: 1px solid #ff6633;  
+            background-color:#ff6633; 
+         } 
+
+
+         .made_money2 {
+            border: 1px solid #00ff00;  
+            background-color:#00ff00; 
+         } 
+         .lost_money2 {
+            border: 1px solid #ff6633;  
+            background-color:#ff6633; 
+         } 
+
+
+         .leaf_right{
+            text-align:right; 
+         }
+         .leaf_left {
+            text-align:left;
+         }
+
+      </style>
+   </head>
+   <body>
+      <table>
+         <tr>
+            <td valign='top'>
+               <table border='1'>
+                  <tr>
+                     <td>bankroll start</td>
+                     <td id='nudge'>100</td>
+                  </tr>
+                  <tr>
+                     <td> upside percent </td>
+                     <td>
+                        <select id='upside'>
+                           <option>.1</option>
+                           <option>.2</option>
+                           <option>.3</option>
+                           <option>.4</option>
+                           <option selected='true'>.5</option>
+                           <option>.6</option>
+                           <option>.7</option>
+                           <option>.8</option>
+                           <option>.9</option>
+                        </select>
+                     <td>
+                  </tr>
+                  <tr>
+                     <td> downside percent </td>
+                     <td>
+                        <select id='downside'>
+                           <option >.1</option>
+                           <option >.2</option>
+                           <option >.3</option>
+                           <option selected='true'>.4</option>
+                           <option >.5</option>
+                           <option>.6</option>
+                           <option>.7</option>
+                           <option>.8</option>
+                           <option>.9</option>
+                        </select>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>iteration count</td>
+                     <td>
+                        <select id='iterations'>
+                           <option selected='true'>10</option>
+                           <option >20</option>
+                           <option>30</option>
+                           <option>40</option>
+                           <option>50</option>
+                        </select>
+                     </td>
+			</tr> 
+                  <tr>
+                     <td>
+                     </td>
+                     <td>
+                        <button onclick='run()' style='width:100%; background-color:#00ff00;'>click to run</button>
+                     </td>
+                  </tr>
+               </table>
+            </td>
+            <td valign='top'>
+               <div style='padding-left:20px;'> 
+                  ergodicity<br/>
+                  <a href='https://www.bloomberg.com/news/articles/2020-12-11/everything-we-ve-learned-about-modern-economic-theory-is-wrong'>https://www.bloomberg.com/news/articles/2020-12-11/everything-we-ve-learned-about-modern-economic-theory-is-wrong</a><br/>
+                  <a href='https://www.nature.com/articles/s41567-019-0732-0'>https://www.nature.com/articles/s41567-019-0732-0</a>
+                  <br/>
+                  <h4>
+                     Hit the 'click to run' button a few times. 
+                  </h4>
+                  <br/>
+                  <h4>
+                     Left below table = the last run <br/>
+                     Right below table = standard deviations from the mean, of all the runs
+                  </h4>
+               </div>
+            </td>
+         </tr>
+      </table>
+	<table border='1'> 
+		<tr>
+			<th>run</th>
+			<th>total</th>
+			<th>average</th>
+		</tr> 	
+		<tr>
+			<td><div class='r' id='run'></div></td>
+			<td><div class='r' id='total'></div></td>
+			<td><div class='r' id='average'></div></td>
+		</tr>
+	</table> 
+	
+      <hr/>
+
+      <table border='1'>
+         <tr>
+            <td valign='top'>
+               <div id='content'></div>
+            </td>
+            <td>&nbsp;</td>
+            <td valign='top'>
+               <div id='stddev'></div>
+            </td>
+
+         </tr>
+      </table>
+
+   </body>
+</html>
