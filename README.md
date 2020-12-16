@@ -10,6 +10,6 @@ ergodicity
 
 # image
 
-15 generations, each running 50 iterations. 2 generations made more than their starting position ( $100 ). 
+20 generations, each running 30 iterations. 5 generations made more than their starting position ( $100 ), 2 of whom made it big.
 
 ![Alt text](run_over_runs.png?raw=true "Run of ten")
