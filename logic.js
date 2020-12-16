@@ -207,7 +207,7 @@ const makeThisRunGUI = (results, most) => {
          	<tr>
                  <th>i</th>
                  <th>up/down</th>
-         		<th>Bankroll</th>
+         		<th>Bankroll ( green = $100+ )</th>
          	</tr>`
 
     results.forEach((item, i) => {
